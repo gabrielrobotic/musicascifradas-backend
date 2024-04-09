@@ -1,7 +1,5 @@
 package com.gabsdev.musicascifradas.models.musica.dto;
 
-import com.gabsdev.musicascifradas.models.usuario.dto.UsuarioResponseDTO;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,6 +10,7 @@ public record MusicaResponseDTO(
         String cantor,
         String linkVersao,
         LocalDateTime dataCriacao,
+        LocalDateTime dataAlteracao,
         Boolean flagAtivo,
         List<EstrofeResponseDTO> estrofes,
         List<SoloResponseDTO> solos,

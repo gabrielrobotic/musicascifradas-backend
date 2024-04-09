@@ -6,10 +6,11 @@ import java.time.LocalDateTime;
 
 public record UsuarioResponseDTO(
         Integer id,
-        String primeiroNome,
-        String segundoNome,
+        String nome,
+        String sobrenome,
         String login,
         UsuarioRole role,
         LocalDateTime dataCriacao,
+        LocalDateTime dataAlteracao,
         Boolean flagAtivo) {
 }

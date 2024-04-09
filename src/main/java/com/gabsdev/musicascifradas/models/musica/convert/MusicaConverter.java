@@ -3,9 +3,6 @@ package com.gabsdev.musicascifradas.models.musica.convert;
 import com.gabsdev.musicascifradas.models.musica.Musica;
 import com.gabsdev.musicascifradas.models.musica.dto.MusicaRequestDTO;
 import com.gabsdev.musicascifradas.models.musica.dto.MusicaResponseDTO;
-import com.gabsdev.musicascifradas.models.usuario.Usuario;
-import com.gabsdev.musicascifradas.models.usuario.converter.UsuarioConverter;
-import com.gabsdev.musicascifradas.models.usuario.dto.UsuarioRequestDTO;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -19,6 +16,7 @@ public class MusicaConverter {
                 musica.getCantor(),
                 musica.getLinkVersao(),
                 musica.getDataCriacao(),
+                musica.getDataAlteracao(),
                 musica.getFlagAtivo(),
                 musica.getEstrofes().stream()
                         .map(EstrofeConverter::toResponseDTO)
@@ -36,6 +34,7 @@ public class MusicaConverter {
         musica.setCantor(musicaRequestDTO.cantor());
         musica.setLinkVersao(musicaRequestDTO.linkVersao());
         musica.setDataCriacao(musicaRequestDTO.dataCriacao());
+        musica.setDataAlteracao(musicaRequestDTO.dataAlteracao());
         musica.setFlagAtivo(musicaRequestDTO.flagAtivo());
         musica.setSolos(musicaRequestDTO.solos().stream()
                 .map(soloRequestDTO -> SoloConverter.toEntity(soloRequestDTO, musica))

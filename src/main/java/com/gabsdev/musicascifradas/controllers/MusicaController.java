@@ -5,7 +5,6 @@ import com.gabsdev.musicascifradas.models.musica.convert.MusicaConverter;
 import com.gabsdev.musicascifradas.models.musica.dto.MusicaRequestDTO;
 import com.gabsdev.musicascifradas.models.musica.dto.MusicaResponseDTO;
 import com.gabsdev.musicascifradas.models.musica.example.MusicaExample;
-import com.gabsdev.musicascifradas.models.usuario.Usuario;
 import com.gabsdev.musicascifradas.services.MusicaService;
 import com.gabsdev.musicascifradas.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/musicas")
@@ -61,6 +59,7 @@ public class MusicaController {
             @RequestParam(name = "titulo", required = false) String titulo,
             @RequestParam(name = "cantor", required = false) String cantor,
             @RequestParam(name = "dataCriacao", required = false) LocalDateTime dataCriacao,
+            @RequestParam(name = "dataAlteracao", required = false) LocalDateTime dataAlteracao,
             @RequestParam(name = "flagAtivo", required = false) Boolean flagAtivo,
             @RequestParam(name = "cifrador", required = false) Integer cifrador) {
         Pageable pageable = PageRequest.of(0, 10, Sort.by("id").ascending());
@@ -68,6 +67,7 @@ public class MusicaController {
                 titulo,
                 cantor,
                 dataCriacao,
+                dataAlteracao,
                 flagAtivo,
                 cifrador);
         Page<MusicaResponseDTO> musicas = service.obterMusicas(example, pageable)

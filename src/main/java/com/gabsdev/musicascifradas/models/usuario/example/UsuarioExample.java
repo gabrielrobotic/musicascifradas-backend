@@ -8,15 +8,16 @@ import org.springframework.data.domain.ExampleMatcher;
 import java.time.LocalDateTime;
 
 public class UsuarioExample {
-    public static Example<Usuario> buildExample(String primeiroNome, String segundoNome,
+    public static Example<Usuario> buildExample(String nome, String sobrenome,
                                                 String username, UsuarioRole role, LocalDateTime dataCriacao,
-                                                Boolean flagAtivo) {
+                                                LocalDateTime dataAlteracao, Boolean flagAtivo) {
         Usuario example = new Usuario();
-        example.setPrimeiroNome(primeiroNome);
-        example.setSegundoNome(segundoNome);
+        example.setNome(nome);
+        example.setSobrenome(sobrenome);
         example.setLogin(username);
         example.setRole(role);
         example.setDataCriacao(dataCriacao);
+        example.setDataCriacao(dataAlteracao);
         example.setFlagAtivo(flagAtivo);
         ExampleMatcher matcher = ExampleMatcher.matching()
                 .withIgnoreCase()

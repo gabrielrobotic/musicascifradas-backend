@@ -29,19 +29,21 @@ public class UsuariosController {
 
     @GetMapping
     public ResponseEntity<Page<UsuarioResponseDTO>> usuarios(
-            @RequestParam(name = "primeiroNome", required = false) String primeiroNome,
-            @RequestParam(name = "segundoNome", required = false) String segundoNome,
+            @RequestParam(name = "nome", required = false) String nome,
+            @RequestParam(name = "sobrenome", required = false) String sobrenome,
             @RequestParam(name = "username", required = false) String username,
             @RequestParam(name = "role", required = false) UsuarioRole role,
             @RequestParam(name = "dataCriacao", required = false) LocalDateTime dataCriacao,
+            @RequestParam(name = "dataAlteracao", required = false) LocalDateTime dataAlteracao,
             @RequestParam(name = "flagAtivo", required = false) Boolean flagAtivo) {
         Pageable pageable = PageRequest.of(0, 10, Sort.by("id").ascending());
         Example<Usuario> example = UsuarioExample.buildExample(
-                primeiroNome,
-                segundoNome,
+                nome,
+                sobrenome,
                 username,
                 role,
                 dataCriacao,
+                dataAlteracao,
                 flagAtivo);
         Page<UsuarioResponseDTO> usuarios = service.obterUsuarios(example, pageable)
                 .map(UsuarioConverter::toResponseDTO);
@@ -52,8 +54,8 @@ public class UsuariosController {
     public <T> ResponseEntity<T> salvar(@RequestBody @Validated UsuarioRequestDTO data) {
         if (service.loadUserByUsername(data.login()) != null) return ResponseEntity.badRequest().build();
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        Usuario novoUsuario = new Usuario(data.primeiroNome(), data.segundoNome(), data.login(),
-                encryptedPassword, data.role(), data.dataCriacao(), data.flagAtivo());
+        Usuario novoUsuario = new Usuario(data.nome(), data.sobrenome(), data.login(),
+                encryptedPassword, data.role(), data.dataCriacao(), data.dataAlteracao(), data.flagAtivo());
         service.save(novoUsuario);
         return ResponseEntity.ok().build();
     }
@@ -68,8 +70,8 @@ public class UsuariosController {
                 || usuarioPeloId == null)
             return ResponseEntity.badRequest().build();
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        Usuario usuarioAtualizar = new Usuario(id, data.primeiroNome(), data.segundoNome(), data.login(),
-                encryptedPassword, data.role(), data.dataCriacao(), data.flagAtivo());
+        Usuario usuarioAtualizar = new Usuario(id, data.nome(), data.sobrenome(), data.login(),
+                encryptedPassword, data.role(), data.dataCriacao(), data.dataAlteracao(), data.flagAtivo());
         service.save(usuarioAtualizar);
         return ResponseEntity.ok().build();
     }

@@ -1,11 +1,12 @@
 CREATE TABLE usuario (
     id SERIAL PRIMARY KEY,
-    primeiro_nome TEXT NOT NULL,
-    segundo_nome TEXT NOT NULL,
+    nome TEXT NOT NULL,
+    sobrenome TEXT NOT NULL,
     login TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL,
     role TEXT NOT NULL,
     data_criacao TIMESTAMP NOT NULL,
+    data_alteracao TIMESTAMP NOT NULL,
     flag_ativo BOOLEAN DEFAULT TRUE
 );
 
@@ -16,6 +17,7 @@ CREATE TABLE musica (
     cantor TEXT,
     link_versao TEXT NOT NULL,
     data_criacao TIMESTAMP NOT NULL,
+    data_alteracao TIMESTAMP NOT NULL,
     flag_ativo BOOLEAN DEFAULT TRUE,
     cifrador_fk INTEGER NOT NULL,
     FOREIGN KEY (cifrador_fk) REFERENCES usuario(id)

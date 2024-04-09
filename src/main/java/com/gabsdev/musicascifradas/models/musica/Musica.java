@@ -1,10 +1,6 @@
 package com.gabsdev.musicascifradas.models.musica;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.gabsdev.musicascifradas.models.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,6 +24,7 @@ public class Musica {
     private String cantor;
     private String linkVersao;
     private LocalDateTime dataCriacao;
+    private LocalDateTime dataAlteracao;
     private Boolean flagAtivo;
     @OneToMany(mappedBy = "musica", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference

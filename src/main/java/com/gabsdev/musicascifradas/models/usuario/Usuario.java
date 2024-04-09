@@ -23,22 +23,24 @@ public class Usuario implements UserDetails {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_id_seq")
     @SequenceGenerator(name = "usuario_id_seq", sequenceName = "usuario_id_seq", allocationSize = 1)
     private Integer id;
-    private String primeiroNome;
-    private String segundoNome;
+    private String nome;
+    private String sobrenome;
     private String login;
     private String password;
     private UsuarioRole role;
     private LocalDateTime dataCriacao;
+    private LocalDateTime dataAlteracao;
     private Boolean flagAtivo;
 
-    public Usuario(String primeiroNome, String segundoNome, String login, String password, UsuarioRole role,
-                   LocalDateTime dataCriacao, Boolean flagAtivo) {
-        this.primeiroNome = primeiroNome;
-        this.segundoNome = segundoNome;
+    public Usuario(String nome, String sobrenome, String login, String password, UsuarioRole role,
+                   LocalDateTime dataCriacao, LocalDateTime dataAlteracao, Boolean flagAtivo) {
+        this.nome = nome;
+        this.sobrenome = sobrenome;
         this.login = login;
         this.password = password;
         this.role = role;
         this.dataCriacao = dataCriacao;
+        this.dataAlteracao = dataAlteracao;
         this.flagAtivo = flagAtivo;
     }
 
